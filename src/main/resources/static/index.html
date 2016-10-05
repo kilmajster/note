@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bootstrap Example</title>
+        <title>Notatnik</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,7 +16,6 @@
                       dataType: 'application/json',
                       complete: function (data) {
                           var obj = JSON.parse(data);
-                          alert(obj);
                           for (var i = 0; i < obj.lenght; i++) {
                             var div = document.createElement('div');
                             div.className = 'notes';
@@ -27,10 +26,13 @@
               });
             }
             var sendNote = function () {
+              var author = document.forms.olga.usr.value;
+              var content = document.forms.olga.comment.value;
+
             $.ajax({
             url: "rest-api/add",
                     type: "POST",
-                    data: "{\"author\":\"javascript\",\"content\":\"nananannananananana\"}",
+                    data: '{"author":"'+author+'","content":"'+content+'"}',
                     contentType: "application/json"
             });
             }
@@ -38,7 +40,7 @@
         <div class="container">
             <h2>ELO NOTATNIK</h2>
             <p>nowa notatka</p>
-            <form>
+            <form id="olga">
                 <div class="form-group">
                     <label for="comment">treść:</label>
                     <textarea class="form-control" rows="5" id="comment"></textarea>
@@ -49,9 +51,9 @@
                 </div>
                 <button type="button" class="btn btn-success" onclick="sendNote()">zapisz</button>
             </form>
-        </div>
-        <div id="notes">
-            <button type="button" class="btn btn-success" onclick="loadNotes()">załaduj</button>
+            <div id="notes">
+                <button type="button" class="btn btn-success" onclick="loadNotes()">załaduj</button>
+            </div>
         </div>
     </body>
 </html>
