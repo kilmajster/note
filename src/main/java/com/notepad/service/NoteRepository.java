@@ -1,6 +1,6 @@
 package com.notepad.service;
 
-import com.notepad.model.NoteEntity;
+import com.notepad.model.Note;
 import org.springframework.data.repository.CrudRepository;
 
-public interface NoteRepository extends CrudRepository<NoteEntity, Long> { }
+public interface NoteRepository extends CrudRepository<Note, Long> { }

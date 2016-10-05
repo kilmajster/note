@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "note")
-public class NoteEntity {
+public class Note {
 
     @Id
     @Column(name = "id")
@@ -25,7 +25,7 @@ public class NoteEntity {
     @Column(name = "creation_date", insertable = false, updatable = false)
     private Date creationDate;
 
-    public NoteEntity() {
+    public Note() {
     }
 
     public Long getId() {
@@ -58,5 +58,10 @@ public class NoteEntity {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "NoteEntity{" + "id=" + id + ", author=" + author + ", content=" + content + ", creationDate=" + creationDate + '}';
     }
 }
