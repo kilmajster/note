@@ -28,11 +28,12 @@
         </div>
         <script>
             var loadNotes = function () {
+                $('#notes').empty();
                 $.getJSON("rest-api/all", function (data) {
                     for (var i = 0; i < data.length; i++) {
                         var div = document.createElement('div');
                         div.className = 'notes';
-                        div.innerHTML = '<div class="panel panel-default"><div class="panel-body"> ' + data[i].content + ' </div><div class="panel-footer"> ' + data[i].author + ' </div></div>';
+                        div.innerHTML = '<div id = "notes_list" class="panel panel-default"><div class="panel-body"> ' + data[i].content + ' </div><div class="panel-footer"> ' + data[i].author + ' </div></div>';
                         document.getElementById('notes').appendChild(div);
                     }
                 });
