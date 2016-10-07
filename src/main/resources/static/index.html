@@ -10,11 +10,10 @@
     </head>
     <body onload="loadNotes()">
         <div class="container">
-            <h2>ELO NOTATNIK</h2>
-            <p>nowa notatka</p>
+            <h2>NOTATNIK</h2>
             <form id="input_form">
                 <div class="form-group">
-                    <label for="comment">treść:</label>
+                    <label for="comment">treść notatki:</label>
                     <textarea class="form-control" rows="5" id="comment"></textarea>
                 </div>
                 <div class="form-group">
@@ -23,6 +22,7 @@
                 </div>
                 <button type="button" class="btn btn-success" onclick="sendNote()">zapisz</button>
             </form>
+            <br>
             <div id="notes">
             </div>
         </div>
