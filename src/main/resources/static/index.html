@@ -8,39 +8,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body>
-        <script>
-            var loadNotes = function () {
-              $.ajax({
-              url: 'rest-api/all',
-                      dataType: 'application/json',
-                      complete: function (data) {
-                          var obj = JSON.parse(data);
-                          for (var i = 0; i < obj.lenght; i++) {
-                            var div = document.createElement('div');
-                            div.className = 'notes';
-                            div.innerHTML = '<div class="panel panel-default"><div class="panel-body"> ' + obj[i].content + ' </div><div class="panel-footer"> ' + obj[i].author + ' </div></div>';
-                            document.getElementById('notes').appendChild(div);
-                          }
-                      }
-              });
-            }
-            var sendNote = function () {
-              var author = document.forms.olga.usr.value;
-              var content = document.forms.olga.comment.value;
-
-            $.ajax({
-            url: "rest-api/add",
-                    type: "POST",
-                    data: '{"author":"'+author+'","content":"'+content+'"}',
-                    contentType: "application/json"
-            });
-            }
-        </script>
+    <body onload="loadNotes()">
         <div class="container">
             <h2>ELO NOTATNIK</h2>
             <p>nowa notatka</p>
-            <form id="olga">
+            <form id="input_form">
                 <div class="form-group">
                     <label for="comment">treść:</label>
                     <textarea class="form-control" rows="5" id="comment"></textarea>
@@ -52,8 +24,29 @@
                 <button type="button" class="btn btn-success" onclick="sendNote()">zapisz</button>
             </form>
             <div id="notes">
-                <button type="button" class="btn btn-success" onclick="loadNotes()">załaduj</button>
             </div>
         </div>
+        <script>
+            var loadNotes = function () {
+                $.getJSON("rest-api/all", function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var div = document.createElement('div');
+                        div.className = 'notes';
+                        div.innerHTML = '<div class="panel panel-default"><div class="panel-body"> ' + data[i].content + ' </div><div class="panel-footer"> ' + data[i].author + ' </div></div>';
+                        document.getElementById('notes').appendChild(div);
+                    }
+                });
+            }
+            var sendNote = function () {
+                var author = document.forms.input_form.usr.value;
+                var content = document.forms.input_form.comment.value;
+                $.ajax({
+                    url: "rest-api/add",
+                    type: "POST",
+                    data: '{"author":"' + author + '","content":"' + content + '"}',
+                    contentType: "application/json"
+                });
+            }
+        </script>
     </body>
 </html>
